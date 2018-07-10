@@ -20,4 +20,6 @@ public interface CustomerService {
 
 	CustomerResponse deleteCustomer(String mobile);
 
+	boolean isDuplicateCustomer(String value);
+
 }

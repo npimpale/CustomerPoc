@@ -3,7 +3,7 @@
 <configuration>
 
 	<property name="LOG_HOME"
-		value="/home/dev/npimpale/CustomerPoc/logs/CustomerPoc.log" />
+		value="/home/dev/npimpale/CustomerPoc/logs/customer-service-app.log" />
 
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
@@ -18,7 +18,7 @@
 
 	<appender name="APP-LOG"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/CustomerPoc.log</file>
+		<file>${LOG_HOME}/customer-service-app.log</file>
 		<encoder
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
@@ -30,7 +30,7 @@
 		<!-- Roll over daily -->
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/archived/CustomerPoc.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${LOG_HOME}/archived/customer-service-app.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 		</rollingPolicy>
 	</appender>

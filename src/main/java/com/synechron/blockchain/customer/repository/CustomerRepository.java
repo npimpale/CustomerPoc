@@ -12,7 +12,7 @@ import com.synechron.blockchain.customer.repository.entity.Customer;
  *
  */
 public interface CustomerRepository extends JpaRepository<Customer, String> {
-	Customer findByMobile(String mobile);
+	Customer findByMobileAndStatus(String mobile, String status);
 
-	Customer findByEmail(String email);
+	Customer findByEmailAndStatus(String email, String status);
 }

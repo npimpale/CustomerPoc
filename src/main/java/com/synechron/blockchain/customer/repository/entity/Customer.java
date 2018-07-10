@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author dev
  *
@@ -24,6 +26,7 @@ public class Customer implements Comparable<Customer> {
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@JsonIgnore
 	private long id;
 
 	@Column(name = "MOBILE", unique = true, nullable = false)
@@ -38,6 +41,7 @@ public class Customer implements Comparable<Customer> {
 	@Column(name = "EMAIL", unique = true, nullable = false)
 	private String email;
 
+	@JsonIgnore
 	@Column(name = "STATUS")
 	private String status = Status.ACTIVE.name();
 

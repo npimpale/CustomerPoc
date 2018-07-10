@@ -25,7 +25,9 @@ public class BaseException extends RuntimeException {
 	 */
 	public BaseException(String exception, String code, String message, String status) {
 		super(exception);
-		// TODO Auto-generated constructor stub
+		this.code = code;
+		this.message = message;
+		this.status = status;
 	}
 
 	/**

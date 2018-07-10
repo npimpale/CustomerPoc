@@ -6,12 +6,14 @@ package com.synechron.blockchain.customer.model.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * @author dev
  *
  */
 @JsonInclude(Include.NON_NULL)
+@JsonPropertyOrder({ "status", "message" })
 public class BaseResponse {
 
 	@JsonProperty("status")

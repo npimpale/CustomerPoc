@@ -6,86 +6,31 @@ package com.synechron.blockchain.customer.model.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.synechron.blockchain.customer.repository.entity.Customer;
 
 /**
  * @author dev
  *
  */
 @JsonInclude(Include.NON_NULL)
-@JsonPropertyOrder({ "mobile", "firstName", "lastName", "email" })
 public class CustomerResponse extends BaseResponse {
 
-	@JsonProperty("mobile")
-	private String mobile;
-
-	@JsonProperty("firstName")
-	private String firstName;
-
-	@JsonProperty("lastName")
-	private String lastName;
-
-	@JsonProperty("email")
-	private String email;
+	@JsonProperty("customer")
+	private Customer customer;
 
 	/**
-	 * @return the mobile
+	 * @return the customer
 	 */
-	public String getMobile() {
-		return mobile;
+	public Customer getCustomer() {
+		return customer;
 	}
 
 	/**
-	 * @param mobile
-	 *            the mobile to set
+	 * @param customer
+	 *            the customer to set
 	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName
-	 *            the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName
-	 *            the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	/*
@@ -96,14 +41,8 @@ public class CustomerResponse extends BaseResponse {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CustomerResponse [mobile=");
-		builder.append(mobile);
-		builder.append(", firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
-		builder.append(", email=");
-		builder.append(email);
+		builder.append("CustomerResponse [customer=");
+		builder.append(customer);
 		builder.append("]");
 		return builder.toString();
 	}

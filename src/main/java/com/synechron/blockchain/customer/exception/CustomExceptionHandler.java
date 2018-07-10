@@ -9,18 +9,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.synechron.blockchain.customer.model.request.ValidationError;
+import com.synechron.blockchain.customer.model.response.BaseResponse;
 import com.synechron.blockchain.customer.validator.ValidationErrorBuilder;
 
 /**
  * @author dev
  *
  */
-@RestControllerAdvice
+@ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
@@ -33,6 +35,17 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private ValidationError createValidationError(MethodArgumentNotValidException exception) {
 		return ValidationErrorBuilder.bindErrors(exception.getBindingResult());
+	}
+
+	@ExceptionHandler(value = EntityCreationException.class)
+	public ResponseEntity<BaseResponse> handleEntityCreationException(EntityCreationException exception) {
+		BaseResponse errorResponse = new BaseResponse();
+		errorResponse.setStatus(exception.getStatus());
+		errorResponse.setMessage(exception.getMessage());
+		ResponseEntity<BaseResponse> responseEntity = new ResponseEntity<BaseResponse>(errorResponse,
+				HttpStatus.BAD_REQUEST);
+
+		return responseEntity;
 	}
 
 }

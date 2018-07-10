@@ -3,40 +3,42 @@
  */
 package com.synechron.blockchain.customer.model.request;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * @author dev
  *
  */
 
-@JsonPropertyOrder({ "mobile", "firstName", "lastName", "email" })
 public class CustomerReq {
 
-	@NotBlank(message = "Customer mobile is mandatory")
-	@Digits(integer = 10, fraction = 0, message = "Mobile number should be 10 digits")
-	@JsonProperty("mobile")
+	@JsonProperty(index = 0, value = "mobile")
+	@NotBlank(message = "Customer mobile is mandatory", groups = { Existing.class, New.class })
+	@Pattern(message = "Mobile number should be 10 digits", regexp = "[0-9]{10}", groups = { Existing.class,
+			New.class })
 	private String mobile;
 
-	@NotBlank(message = "Customer first name is mandatory")
-	@Size(max = 20, message = "FirstName should not be more than 20 characters")
-	@JsonProperty("firstName")
+	@NotBlank(message = "Customer first name is mandatory", groups = { New.class })
+	@Size(max = 20, message = "FirstName should not be more than 20 characters", groups = { Existing.class, New.class })
+	@JsonProperty(index = 1, value = "firstName")
 	private String firstName;
 
-	@NotBlank(message = "Customer last name is mandatory")
-	@Size(max = 20, message = "LastName should not be more than 20 characters")
-	@JsonProperty("lastName")
+	@NotBlank(message = "Customer last name is mandatory", groups = { New.class })
+	@Size(max = 20, message = "LastName should not be more than 20 characters", groups = { Existing.class, New.class })
+	@JsonProperty(index = 2, value = "lastName")
 	private String lastName;
 
-	@NotBlank(message = "Customer email is mandatory")
-	@Email(message = "Email should be in correct format")
-	@JsonProperty("email")
+	@NotBlank(message = "Customer email is mandatory", groups = { New.class })
+	@Null(message = "Cannot update email", groups = { Existing.class })
+	@Size(max = 30, message = "Email should not be more than 30 characters", groups = { New.class })
+	@Email(message = "Email should be in correct format", groups = { New.class })
+	@JsonProperty(index = 3, value = "email")
 	private String email;
 
 	/**
@@ -84,6 +86,12 @@ public class CustomerReq {
 		builder.append("CustomerReq [mobile=").append(mobile).append(", firstName=").append(firstName)
 				.append(", lastName=").append(lastName).append(", email=").append(email).append("]");
 		return builder.toString();
+	}
+
+	public interface Existing {
+	}
+
+	public interface New {
 	}
 
 }

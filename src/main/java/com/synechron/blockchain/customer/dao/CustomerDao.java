@@ -20,4 +20,6 @@ public interface CustomerDao {
 
 	void deleteCustomer(String mobile);
 
+	boolean isDuplicateCustomer(String value);
+
 }
