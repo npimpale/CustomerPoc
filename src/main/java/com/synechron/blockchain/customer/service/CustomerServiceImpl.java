@@ -43,7 +43,8 @@ public class CustomerServiceImpl implements CustomerService {
 		LOGGER.info("registerCustomer start");
 		long startTime = System.currentTimeMillis();
 
-		if (customerDao.isDuplicateCustomer(request.getMobile())) {
+		if (customerDao.isDuplicateCustomer(request.getMobile())
+				|| customerDao.isDuplicateCustomer(request.getEmail())) {
 			throw new EntityCreationException(ResponseCode.FAIL.getCode(), "Customer Already Exists!",
 					ResponseCode.FAIL.getStatus());
 		}

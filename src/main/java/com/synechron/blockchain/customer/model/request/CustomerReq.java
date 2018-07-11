@@ -48,6 +48,13 @@ public class CustomerReq {
 		// TODO Auto-generated constructor stub
 	}
 
+	public CustomerReq(String mobile, String firstName, String lastName, String email) {
+		this.mobile = mobile;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
 	public String getMobile() {
 		return mobile;
 	}

@@ -3,7 +3,6 @@
  */
 package com.synechron.blockchain.customer.config;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -12,11 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import com.codahale.metrics.ConsoleReporter;
-import com.codahale.metrics.JmxReporter;
-import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.graphite.Graphite;
-import com.codahale.metrics.graphite.GraphiteReporter;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 
@@ -35,34 +30,19 @@ public class MetricsConfig extends MetricsConfigurerAdapter {
 	@Value("${customer.metrics.console.interval}")
 	private Long consoleInterval;
 
-	@Value("${customer.metrics.graphite.enabled}")
-	private boolean graphiteEnabled;
-
-	@Value("${customer.metrics.jmx.enabled}")
-	private boolean jmxEnabled;
-
-	@Value("${customer.metrics.graphite.server}")
-	private String graphiteServer;
-
-	@Value("${customer.metrics.graphite.port}")
-	private int graphitePort;
-
-	@Value("${customer.metrics.prefix}")
-	private String metricsPrefix;
-
 	@Override
 	public void configureReporters(MetricRegistry metricRegistry) {
 		logger.info("configureReporters start");
 
-		if (graphiteEnabled) {
-			/* Configuring the Graphite Reporter. */
+		/*if (graphiteEnabled) {
+			 Configuring the Graphite Reporter. 
 			final Graphite graphite = new Graphite(new InetSocketAddress(graphiteServer, graphitePort));
 			final GraphiteReporter reporter = GraphiteReporter.forRegistry(metricRegistry).prefixedWith(metricsPrefix)
 					.convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).filter(MetricFilter.ALL)
 					.build(graphite);
 			reporter.start(1, TimeUnit.SECONDS);
 			logger.info("Graphite reporter for metrics was initialized successfully.");
-		}
+		}*/
 
 		if (consoleEnabled) {
 			/* Configuring the Console Reporter. */
@@ -72,12 +52,12 @@ public class MetricsConfig extends MetricsConfigurerAdapter {
 			logger.info("Console reporter for metrics was initialized successfully.");
 		}
 
-		if (jmxEnabled) {
-			/* Configuring the Jmx Reporter. */
+		/*if (jmxEnabled) {
+			 Configuring the Jmx Reporter. 
 			final JmxReporter reporter = JmxReporter.forRegistry(metricRegistry).build();
 			reporter.start();
 			logger.info("JMX reporter for metrics was initialized successfully.");
-		}
+		}*/
 
 		logger.info("configureReporters end");
 	}

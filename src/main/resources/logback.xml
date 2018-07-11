@@ -3,7 +3,7 @@
 <configuration>
 
 	<property name="LOG_HOME"
-		value="/home/dev/npimpale/CustomerPoc/logs/customer-service-app.log" />
+		value="/home/dev/npimpale/CustomerPoc/logs" />
 
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
